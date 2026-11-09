@@ -3,286 +3,256 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Effect | Texture Styling Paste</title>
-  <meta name="description" content="Texture styling paste by Effect. Strong hold, low shine. Made by master barber Tim Medina.">
+  <title>Texture Styling Paste | Effect</title>
+  <meta name="description" content="Texture styling paste by Effect. Strong hold, matte finish, made without parabens or phthalates. Created by master barber Tim Medina.">
+  <meta property="og:title" content="Texture Styling Paste | Effect">
+  <meta property="og:description" content="Strong hold, matte finish, and ingredients that are actually good for your hair. Made by a barber.">
+  <meta property="og:image" content="images/texture-jar.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=2">
 </head>
 <body>
 
-  <!-- Announcement bar (rotating) -->
-  <div class="promo" aria-live="polite">
-    <div class="promo-track">
-      <a href="#shop" class="promo-item is-active">Free shipping on 2+ jars</a>
-      <a href="#bundle" class="promo-item">Stock up: the 3-jar Chair Kit saves 15%</a>
-      <a href="#barber" class="promo-item">Book a cut with Tim, Aurora IL</a>
+  <header class="hdr">
+    <div class="hdr-left">
+      <a href="#shop" class="pill">Shop</a>
+      <a href="creators.html" class="pill pill-hide-sm">Creators</a>
     </div>
-  </div>
-
-  <!-- Header -->
-  <header class="nav">
-    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span>
-    </button>
-    <nav class="nav-links" aria-label="Main">
-      <a href="#shop">Shop</a>
-      <a href="#how">How to Use</a>
-      <a href="#barber">Our Story</a>
-      <a href="#faq">FAQ</a>
-    </nav>
-    <a href="#top" class="logo" aria-label="Effect home">Effect</a>
-    <div class="nav-actions">
-      <a href="#shop" class="btn btn-sm btn-dark nav-cta">Shop Texture</a>
-      <button class="cart-btn" aria-label="Open cart">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h14l-1.2 12H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
-        <span class="cart-count">0</span>
-      </button>
+    <a href="index.html" class="hdr-logo" aria-label="Effect home">Effect</a>
+    <div class="hdr-right">
+      <button class="pill cart-btn" aria-label="Open bag">Bag <span class="cart-count">0</span></button>
+      <button class="pill pill-dot menu-btn" aria-expanded="false" aria-controls="menu"><span class="menu-label">Menu</span><i aria-hidden="true"></i></button>
     </div>
   </header>
 
+  <nav class="menu" id="menu" aria-label="Main" hidden>
+    <ol class="menu-list">
+      <li><a href="#shop"><span>01</span>Shop</a></li>
+      <li><a href="#formula"><span>02</span>Ingredients</a></li>
+      <li><a href="#story"><span>03</span>Our story</a></li>
+      <li><a href="creators.html"><span>04</span>Creators</a></li>
+      <li><a href="#faq"><span>05</span>FAQ</a></li>
+    </ol>
+    <p class="menu-foot">Effect Hair Studio · Aurora, IL</p>
+  </nav>
+
   <main id="top">
 
-    <!-- Scroll hero: the jar animates as you scroll through four feature cards.
-         Plain-JS port of the FrameSequenceHero component. To use a real frame
-         sequence (e.g. a filmed 360° spin), add data-frame-count="120" and
-         data-frame-path="images/frames/frame_####.jpg" to this section. -->
-    <section class="fsh" id="hero">
-      <div class="fsh-stage">
-        <div class="fsh-loader" aria-hidden="true">
-          <p class="fsh-loader-text">Loading · 0%</p>
-          <div class="fsh-loader-track"><span class="fsh-loader-fill"></span></div>
+    <!-- Scroll hero: the jar spins over the rounded shape as you scroll.
+         Frame mode still works: add data-frame-count / data-frame-path. -->
+    <section class="hero" id="hero">
+      <div class="hero-stage">
+        <h1 class="hero-title"><span>Texture</span></h1>
+        <p class="hero-side hero-side-l">Styling<br>paste</p>
+        <p class="hero-side hero-side-r">Made by<br>Effect</p>
+
+        <div class="hero-art">
+          <div class="hero-shape" aria-hidden="true">
+            <svg class="hero-ring" viewBox="0 0 400 400">
+              <defs><path id="ring" d="M200,200 m-150,0 a150,150 0 1,1 300,0 a150,150 0 1,1 -300,0"/></defs>
+              <text><textPath href="#ring" textLength="935" lengthAdjust="spacing">Strong hold · Matte finish · Clean formula · Made by a barber · No parabens · No phthalates ·</textPath></text>
+            </svg>
+          </div>
+          <div class="hero-jar">
+            <img class="fsh-canvas" src="images/jar-disc.jpg" alt="Effect Texture styling paste jar, 100g" draggable="false">
+          </div>
         </div>
 
-        <div class="fsh-canvas-wrap">
-          <img class="fsh-canvas" src="images/texture-jar.jpg" alt="Effect Texture styling paste jar: strong hold and low shine, 100g" draggable="false">
-        </div>
-
-        <div class="fsh-copy">
-          <p class="fsh-eyebrow">STYLING <span>/ paste</span></p>
-          <h1 class="fsh-title">Texture</h1>
-          <p class="fsh-made">Made by Effect</p>
-        </div>
-
-        <div class="fsh-cards">
-          <article class="fsh-card" data-from="0" data-to="0.25" style="--c:#a8805a">
-            <div class="fsh-card-inner">
-              <span class="fsh-card-glow" aria-hidden="true"></span>
-              <div class="fsh-card-head"><span class="fsh-card-num"><strong>01</strong> / 04</span><span class="fsh-card-icon" aria-hidden="true">✦</span></div>
-              <h3 class="fsh-card-title">Strong hold.</h3>
-              <p class="fsh-card-desc">Locks your shape in place from the first coffee to last call. No touch-ups.</p>
-              <div class="fsh-card-foot"><div class="fsh-ticks"></div><span class="fsh-card-label">Hold</span></div>
-            </div>
-          </article>
-          <article class="fsh-card" data-from="0.25" data-to="0.5" style="--c:#8c8c8c">
-            <div class="fsh-card-inner">
-              <span class="fsh-card-glow" aria-hidden="true"></span>
-              <div class="fsh-card-head"><span class="fsh-card-num"><strong>02</strong> / 04</span><span class="fsh-card-icon" aria-hidden="true">◐</span></div>
-              <h3 class="fsh-card-title">Low shine.</h3>
-              <p class="fsh-card-desc">A natural matte finish that looks like hair, not product.</p>
-              <div class="fsh-card-foot"><div class="fsh-ticks"></div><span class="fsh-card-label">Finish</span></div>
-            </div>
-          </article>
-          <article class="fsh-card" data-from="0.5" data-to="0.75" style="--c:#c9a27c">
-            <div class="fsh-card-inner">
-              <span class="fsh-card-glow" aria-hidden="true"></span>
-              <div class="fsh-card-head"><span class="fsh-card-num"><strong>03</strong> / 04</span><span class="fsh-card-icon" aria-hidden="true">▣</span></div>
-              <h3 class="fsh-card-title">Real texture.</h3>
-              <p class="fsh-card-desc">Grit, volume and separation. Restyle with your fingers all day.</p>
-              <div class="fsh-card-foot"><div class="fsh-ticks"></div><span class="fsh-card-label">Texture</span></div>
-            </div>
-          </article>
-          <article class="fsh-card" data-from="0.75" data-to="1.01" style="--c:#141414">
-            <div class="fsh-card-inner">
-              <span class="fsh-card-glow" aria-hidden="true"></span>
-              <div class="fsh-card-head"><span class="fsh-card-num"><strong>04</strong> / 04</span><span class="fsh-card-icon" aria-hidden="true">✂</span></div>
-              <h3 class="fsh-card-title">Made by a barber.</h3>
-              <p class="fsh-card-desc">The paste Tim Medina finishes his own clients with. 100g jar.</p>
-              <a href="#shop" class="btn btn-dark btn-sm fsh-card-cta">SHOP TEXTURE · $24</a>
-              <div class="fsh-card-foot"><div class="fsh-ticks"></div><span class="fsh-card-label">Effect</span></div>
-            </div>
-          </article>
-        </div>
-
-        <a href="#shop" class="btn btn-dark fsh-cta">SHOP NOW</a>
-        <p class="fsh-sub">Scroll to explore</p>
-        <div class="fsh-progress"><span class="fsh-progress-fill"></span></div>
+        <ol class="hero-steps" aria-hidden="true">
+          <li class="is-on"><b>01</b> Strong hold</li>
+          <li><b>02</b> Matte finish</li>
+          <li><b>03</b> Clean formula</li>
+          <li><b>04</b> Made by a barber</li>
+        </ol>
+        <p class="hero-hint">Scroll to discover</p>
+        <div class="hero-progress"><span></span></div>
       </div>
     </section>
 
-    <!-- Marquee -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track">
-        <span>Strong hold</span><span>✦</span><span>Low shine</span><span>✦</span><span>Matte texture</span><span>✦</span><span>Restylable</span><span>✦</span><span>Washes out clean</span><span>✦</span><span>Made by a barber</span><span>✦</span>
-        <span>Strong hold</span><span>✦</span><span>Low shine</span><span>✦</span><span>Matte texture</span><span>✦</span><span>Restylable</span><span>✦</span><span>Washes out clean</span><span>✦</span><span>Made by a barber</span><span>✦</span>
+    <!-- Intro statement -->
+    <section class="intro">
+      <p class="label">The Effect</p>
+      <p class="intro-text">A styling paste made from clays, butters and oils that are <em>actually good for your hair.</em> No parabens. No phthalates. No flakes by lunch.</p>
+      <ul class="intro-tags">
+        <li>Paraben-free</li><li>Phthalate-free</li><li>Rinses clean</li><li>Barber-made</li>
+      </ul>
+    </section>
+
+    <!-- Product -->
+    <section id="shop" class="pdp">
+      <div class="pdp-gallery">
+        <div class="pdp-main"><img class="pdp-main-img" src="images/jar-disc.jpg" alt="Texture styling paste, 100g jar"></div>
+        <div class="pdp-thumbs">
+          <button class="pdp-thumb is-active" data-src="images/jar-disc.jpg" data-fit="disc" aria-label="Studio photo"><img src="images/jar-disc.jpg" alt=""></button>
+          <button class="pdp-thumb" data-src="images/texture-jar-phone.jpg" data-fit="photo" aria-label="Jar photo"><img src="images/texture-jar-phone.jpg" alt=""></button>
+        </div>
       </div>
-    </div>
 
-    <!-- Shop -->
-    <section id="shop" class="section">
-      <div class="section-head">
-        <h2>Shop the <em>best seller</em></h2>
-        <p>One jar. Every texture. Pick the size that fits how often you style.</p>
-      </div>
+      <div class="pdp-info">
+        <p class="label">Styling paste · 100g</p>
+        <h2 class="pdp-title">Texture</h2>
+        <p class="pdp-price"><span class="js-price">$24</span><s class="js-compare"></s></p>
+        <p class="pdp-lede">Strong hold and a matte finish from a formula built on clays, butters and oils that care for your hair and scalp.</p>
 
-      <div class="products">
-        <article class="product" data-id="single" data-name="Texture Styling Paste" data-price="24">
-          <div class="product-media">
-            <span class="badge">Best seller</span>
-            <img src="images/texture-jar.jpg" alt="Texture styling paste, single jar" loading="lazy">
-          </div>
-          <div class="product-body">
-            <h3>Texture Styling Paste</h3>
-            <p class="product-meta">100g · Strong hold · Low shine</p>
-            <div class="price"><span>$24</span></div>
-            <button class="btn btn-dark btn-block add-to-cart">ADD TO BAG</button>
-          </div>
-        </article>
+        <dl class="meters">
+          <div><dt>Hold</dt><dd class="meter" style="--n:4"><i></i><i></i><i></i><i></i><i></i></dd><dd class="meter-v">Strong</dd></div>
+          <div><dt>Shine</dt><dd class="meter" style="--n:1"><i></i><i></i><i></i><i></i><i></i></dd><dd class="meter-v">Matte</dd></div>
+          <div><dt>Texture</dt><dd class="meter" style="--n:5"><i></i><i></i><i></i><i></i><i></i></dd><dd class="meter-v">High</dd></div>
+        </dl>
 
-        <article class="product" data-id="duo" data-name="Texture Duo" data-price="44">
-          <div class="product-media">
-            <span class="badge badge-accent">8% off</span>
-            <img src="images/texture-jar.jpg" alt="Texture styling paste, two jars" loading="lazy">
-            <span class="qty-tag">×2</span>
-          </div>
-          <div class="product-body">
-            <h3>Texture Duo</h3>
-            <p class="product-meta">2 × 100g · Free shipping</p>
-            <div class="price"><span>$44</span><s>$48</s></div>
-            <button class="btn btn-dark btn-block add-to-cart">ADD TO BAG</button>
-          </div>
-        </article>
+        <fieldset class="variants">
+          <legend class="label">Choose your size</legend>
+          <label class="variant">
+            <input type="radio" name="variant" value="single" data-name="Texture · 1 jar" data-price="24" data-compare="" checked>
+            <span class="variant-body"><span class="variant-name">1 jar</span><span class="variant-note">100g</span><span class="variant-price">$24</span></span>
+          </label>
+          <label class="variant">
+            <input type="radio" name="variant" value="duo" data-name="Texture · 2 jars" data-price="44" data-compare="48">
+            <span class="variant-body"><span class="variant-name">2 jars</span><span class="variant-note">Save 8% · Free shipping</span><span class="variant-price">$44</span></span>
+          </label>
+          <label class="variant" id="bundle">
+            <input type="radio" name="variant" value="kit" data-name="Texture · 3 jars" data-price="61" data-compare="72">
+            <span class="variant-body"><span class="variant-name">3 jars</span><span class="variant-note">Save 15% · Free shipping</span><span class="variant-price">$61</span></span>
+            <span class="variant-flag">Best value</span>
+          </label>
+        </fieldset>
 
-        <article class="product" id="bundle" data-id="kit" data-name="The Chair Kit" data-price="61">
-          <div class="product-media">
-            <span class="badge badge-accent">15% off</span>
-            <img src="images/texture-jar.jpg" alt="Texture styling paste, three jars" loading="lazy">
-            <span class="qty-tag">×3</span>
-          </div>
-          <div class="product-body">
-            <h3>The Chair Kit</h3>
-            <p class="product-meta">3 × 100g · Free shipping</p>
-            <div class="price"><span>$61</span><s>$72</s></div>
-            <button class="btn btn-dark btn-block add-to-cart">ADD TO BAG</button>
-          </div>
-        </article>
+        <button class="btn btn-clay btn-block add-to-cart">Add to bag · <span class="js-btn-price">$24</span></button>
+
+        <div class="pdp-acc">
+          <details open>
+            <summary>Details</summary>
+            <p>A styling paste with the grip and matte finish of a clay. Works on short to medium hair, straight to wavy. Restyle with your fingers through the day, and it rinses out with one wash.</p>
+          </details>
+          <details>
+            <summary>How to use</summary>
+            <ol class="howto">
+              <li>Start with dry or towel-dried hair.</li>
+              <li>Warm a fingertip's worth between your palms.</li>
+              <li>Rake it through from back to front, roots to ends.</li>
+              <li>Twist and piece with your fingers. Add more for extra hold.</li>
+            </ol>
+          </details>
+          <details>
+            <summary>Full ingredients</summary>
+            <!-- PLACEHOLDER: replace with Tim's actual ingredient list from the label -->
+            <p>Bentonite clay, kaolin clay, beeswax, shea butter, castor oil, jojoba oil, rosemary oil.</p>
+          </details>
+        </div>
       </div>
     </section>
 
-    <!-- Value stack -->
-    <section class="value">
-      <div class="value-media">
-        <img src="images/texture-jar.jpg" alt="" loading="lazy">
+    <!-- Formula. PLACEHOLDER INGREDIENTS: swap for Tim's actual formula before launch. -->
+    <section id="formula" class="formula">
+      <div class="formula-head">
+        <p class="label">The formula</p>
+        <h2>Not just natural.<br><em>Good for your hair.</em></h2>
+        <p>"Natural" on a label doesn't say much. Every ingredient in Texture has a job: hold your style, or take care of the hair and scalp underneath it.</p>
       </div>
-      <div class="value-copy">
-        <p class="eyebrow eyebrow-light">Why Texture</p>
-        <h2>Built in the chair, <em>not a lab.</em></h2>
-        <ul class="checks">
-          <li>Strong hold that lasts from morning to night</li>
-          <li>Low shine, natural matte finish</li>
-          <li>Adds grit, volume and separation</li>
-          <li>Restyle with your hands, no reapplying</li>
-          <li>Rinses out with one wash</li>
-        </ul>
-        <a href="#shop" class="btn btn-light">SHOP TEXTURE</a>
-      </div>
-    </section>
-
-    <!-- How to use -->
-    <section id="how" class="section">
-      <div class="section-head">
-        <h2>How to <em>use it</em></h2>
-        <p>Thirty seconds, four steps. Less is more. You can always add.</p>
-      </div>
-      <ol class="steps">
-        <li><span class="step-num">01</span><h3>Dry hair</h3><p>Start with dry or towel-dried hair for the most grip.</p></li>
-        <li><span class="step-num">02</span><h3>Warm it up</h3><p>Scoop a fingertip's worth and rub between your palms until it's clear.</p></li>
-        <li><span class="step-num">03</span><h3>Work it in</h3><p>Rake it through from the back to the front, roots to ends.</p></li>
-        <li><span class="step-num">04</span><h3>Shape it</h3><p>Twist, push and piece it with your fingers. Add more for extra hold.</p></li>
+      <ol class="ing-grid">
+        <li><span class="ing-no">01</span><span class="ing-role">Hold</span><h3>Bentonite clay</h3><p>The grip. Hold and a matte finish, and it soaks up excess oil so hair doesn't go flat by noon.</p></li>
+        <li><span class="ing-no">02</span><span class="ing-role">Texture</span><h3>Kaolin clay</h3><p>A gentle, fine clay that builds texture and volume without drying out your scalp.</p></li>
+        <li><span class="ing-no">03</span><span class="ing-role">Hold</span><h3>Beeswax</h3><p>Flexible hold that keeps its shape but still lets you restyle with your hands.</p></li>
+        <li><span class="ing-no">04</span><span class="ing-role">Condition</span><h3>Shea butter</h3><p>Softens and conditions each strand, so hair feels like hair, not crunchy.</p></li>
+        <li><span class="ing-no">05</span><span class="ing-role">Scalp</span><h3>Castor &amp; jojoba</h3><p>Jojoba is close to your scalp's own oils, so it moisturizes without clogging. Castor adds strength and slip.</p></li>
+        <li><span class="ing-no">06</span><span class="ing-role">Scalp</span><h3>Rosemary oil</h3><p>A barbershop favorite for scalp care, with a clean herbal scent instead of synthetic fragrance.</p></li>
       </ol>
     </section>
 
-    <!-- Founder / barber -->
-    <section id="barber" class="founder">
-      <div class="founder-media">
-        <div class="founder-photo">
-          <img src="images/tim-medina.jpg" alt="Tim Medina, master barber and founder of Effect, in a grey suit on a leather couch" loading="lazy">
-        </div>
-        <p class="founder-tag">Tim Medina<small>Master Barber</small></p>
+    <!-- Made without -->
+    <section class="without">
+      <div class="without-copy">
+        <p class="label label-clay">Made without</p>
+        <h2>What's not in the jar matters just as much.</h2>
+        <p>Parabens and phthalates turn up in a lot of grooming products, and researchers have studied both as possible hormone disruptors. We left them out, along with anything that dries your scalp or flakes by the afternoon.</p>
       </div>
-      <div class="founder-copy">
-        <p class="eyebrow">Our story</p>
+      <ul class="without-list">
+        <li>Parabens</li>
+        <li>Phthalates</li>
+        <li>Synthetic fragrance</li>
+        <li>Petroleum &amp; mineral oil</li>
+        <li>Silicones</li>
+        <li>Drying alcohols</li>
+      </ul>
+    </section>
+
+    <!-- Comparison -->
+    <section class="compare">
+      <p class="label">Side by side</p>
+      <h2>Read the label.</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col"><span class="sr-only">Feature</span></th><th scope="col" class="us">Texture by Effect</th><th scope="col">Typical drugstore clay</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Parabens</th><td class="us">None</td><td>Often</td></tr>
+            <tr><th scope="row">Phthalates (hidden in "fragrance")</th><td class="us">None</td><td>Often</td></tr>
+            <tr><th scope="row">Petroleum or mineral oil</th><td class="us">None</td><td>Common</td></tr>
+            <tr><th scope="row">Ingredients that condition hair</th><td class="us">Shea, jojoba, castor</td><td>Rarely</td></tr>
+            <tr><th scope="row">Rinses out in one wash</th><td class="us">Yes</td><td>Not always</td></tr>
+            <tr><th scope="row">Made by a working barber</th><td class="us">Yes</td><td>No</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Story -->
+    <section id="story" class="story">
+      <div class="story-media">
+        <img src="images/tim-medina.jpg" alt="Tim Medina, master barber and founder of Effect" loading="lazy">
+      </div>
+      <div class="story-copy">
+        <p class="label">Our story</p>
         <h2>Made by the guy <em>cutting your hair.</em></h2>
-        <p>Effect started behind the chair. Tim Medina is a master barber who spent years reaching for products that either held but looked greasy, or looked right but fell flat by lunch.</p>
-        <p>So he made his own. Texture is the paste he finishes his own clients with: strong hold, low shine, and a look that still moves like hair.</p>
-        <div class="founder-ctas">
-          <a href="https://www.effecthairstudios.com/book" class="btn btn-dark" target="_blank" rel="noopener">BOOK A CUT</a>
-          <a href="https://www.effecthairstudios.com/" class="btn btn-ghost" target="_blank" rel="noopener">EFFECT HAIR STUDIO</a>
+        <p>Effect started behind the chair. Tim Medina is a master barber who spent years reaching for products that either held but looked greasy, or looked right but fell flat by lunch, and too many of them listed ingredients he wouldn't want on his clients' scalps every day.</p>
+        <p>So he made his own. Texture is the paste he finishes his clients with: strong hold, matte finish, and a formula that takes care of your hair while it holds.</p>
+        <div class="story-ctas">
+          <a href="https://www.effecthairstudios.com/book" class="btn btn-dark" target="_blank" rel="noopener">Book a cut</a>
+          <a href="https://www.effecthairstudios.com/" class="btn btn-ghost" target="_blank" rel="noopener">Visit the studio</a>
         </div>
-        <p class="founder-loc">Beauty Concepts · 4012 Fox Valley Center Dr, Aurora, IL 60504</p>
+        <p class="story-loc">Beauty Concepts · 4012 Fox Valley Center Dr, Aurora, IL 60504</p>
       </div>
     </section>
 
-    <!-- Hold / shine scale -->
-    <section class="section scale-wrap">
-      <div class="section-head">
-        <h2>Where it <em>sits</em></h2>
-        <p>How Texture compares to the rest of the shelf.</p>
-      </div>
-      <div class="scale">
-        <div class="scale-row">
-          <span class="scale-label">Hold</span>
-          <div class="scale-bar"><span style="--v: 85%"></span></div>
-          <span class="scale-end">Strong</span>
-        </div>
-        <div class="scale-row">
-          <span class="scale-label">Shine</span>
-          <div class="scale-bar"><span style="--v: 20%"></span></div>
-          <span class="scale-end">Low</span>
-        </div>
-        <div class="scale-row">
-          <span class="scale-label">Texture</span>
-          <div class="scale-bar"><span style="--v: 90%"></span></div>
-          <span class="scale-end">High</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Banner -->
-    <section class="banner">
-      <div class="banner-copy">
-        <h2>Messy on purpose.<br><em>Sharp by design.</em></h2>
-        <p>The finish your barber gives you, in a jar you can take home.</p>
-        <a href="#shop" class="btn btn-light">GET THE LOOK</a>
-      </div>
+    <!-- Creators -->
+    <section class="band">
+      <p class="label label-cream">The Effect Creator Program</p>
+      <h2>Get paid to post your hair.</h2>
+      <ul class="band-stats">
+        <li><strong>20%</strong><span>on every sale</span></li>
+        <li><strong>Free</strong><span>jar to start</span></li>
+        <li><strong>No</strong><span>follower minimum</span></li>
+      </ul>
+      <a href="creators.html" class="btn btn-cream">Apply to join</a>
     </section>
 
     <!-- FAQ -->
-    <section id="faq" class="section faq-wrap">
-      <div class="section-head">
-        <h2>Questions, <em>answered</em></h2>
-      </div>
+    <section id="faq" class="faq-wrap">
+      <p class="label">FAQ</p>
+      <h2>Questions</h2>
       <div class="faq">
         <details>
+          <summary>What makes it different from other clays?</summary>
+          <p>Most styling products only think about hold. Texture is made from ingredients that also condition your hair and scalp, and it's made without parabens, phthalates, petroleum or silicones.</p>
+        </details>
+        <details>
+          <summary>Will it flake or build up on my scalp?</summary>
+          <p>No. It's made to rinse out with one wash using regular shampoo, so nothing builds up on your scalp or turns into white flakes during the day.</p>
+        </details>
+        <details>
           <summary>Is it a clay, a paste or a pomade?</summary>
-          <p>Texture is a styling paste with a clay-like matte finish. It gives the grip and texture of a clay with the easy spread of a paste, and none of the wet shine of a pomade.</p>
+          <p>A styling paste with a clay-like matte finish: the grip of a clay, the easy spread of a paste, and none of the wet shine of a pomade.</p>
         </details>
         <details>
           <summary>What hair types does it work on?</summary>
-          <p>Short to medium-length hair, straight to wavy. It's great for textured crops, quiffs, messy fringes and side parts. Thick hair may need a little more product.</p>
-        </details>
-        <details>
-          <summary>How much should I use?</summary>
-          <p>Start with a fingertip-sized scoop. Warm it fully in your palms before applying. Add more only if you need extra hold.</p>
-        </details>
-        <details>
-          <summary>Does it wash out?</summary>
-          <p>Yes. One wash with regular shampoo takes it out.</p>
+          <p>Short to medium hair, straight to wavy. Great for textured crops, quiffs, messy fringes and side parts. Thick hair may need a little more.</p>
         </details>
         <details>
           <summary>How long does a jar last?</summary>
-          <p>With daily use, most people get about two to three months from a 100g jar.</p>
+          <p>With daily use, most people get about two to three months out of a 100g jar.</p>
         </details>
         <details>
           <summary>Can I buy it at the shop?</summary>
@@ -291,14 +261,13 @@
       </div>
     </section>
 
-    <!-- Newsletter -->
     <section class="newsletter">
-      <h2>Don't miss <em>a drop.</em></h2>
-      <p>Restocks, new products and styling tips from Tim. No spam.</p>
+      <h2>Restocks &amp; styling tips.</h2>
+      <p>New drops and how-tos from Tim. No spam.</p>
       <form class="news-form">
         <label for="email" class="sr-only">Email address</label>
-        <input id="email" type="email" placeholder="Your email" required>
-        <button class="btn btn-dark" type="submit">SIGN UP</button>
+        <input id="email" type="email" placeholder="Email address" required>
+        <button class="btn btn-dark" type="submit">Sign up</button>
       </form>
       <p class="news-msg" role="status"></p>
     </section>
@@ -306,40 +275,41 @@
   </main>
 
   <footer class="footer">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <span class="logo logo-light">Effect</span>
-        <p>Texture styling paste. Strong hold, low shine. Made by a barber.</p>
+    <p class="footer-mark" aria-hidden="true">EFFECT<em>Texture</em></p>
+    <div class="footer-grid">
+      <div>
+        <h4>Shop</h4>
+        <a href="#shop">Texture</a>
+        <a href="#bundle">3-jar bundle</a>
+        <a href="#formula">Ingredients</a>
       </div>
-      <div class="footer-cols">
-        <div>
-          <h4>Shop</h4>
-          <a href="#shop">Texture Paste</a>
-          <a href="#bundle">The Chair Kit</a>
-        </div>
-        <div>
-          <h4>Learn</h4>
-          <a href="#how">How to Use</a>
-          <a href="#faq">FAQ</a>
-        </div>
-        <div>
-          <h4>Effect</h4>
-          <a href="#barber">Our Story</a>
-          <a href="https://www.effecthairstudios.com/book" target="_blank" rel="noopener">Book a Cut</a>
-        </div>
+      <div>
+        <h4>Effect</h4>
+        <a href="#story">Our story</a>
+        <a href="creators.html">Creators</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div>
+        <h4>The studio</h4>
+        <p>Beauty Concepts<br>4012 Fox Valley Center Dr<br>Aurora, IL 60504</p>
+        <a href="https://www.effecthairstudios.com/book" target="_blank" rel="noopener">Book a cut</a>
+      </div>
+      <div>
+        <h4>Say hello</h4>
+        <p>Questions about Texture, wholesale for your shop, or the creator program? Find Tim at the studio.</p>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; <span id="year"></span> Effect Hair Studio · Aurora, IL</p>
+      <p>&copy; <span id="year"></span> Effect Hair Studio</p>
+      <p>Statements describe our formula and have not been evaluated by the FDA.</p>
     </div>
   </footer>
 
-  <!-- Cart drawer -->
   <div class="overlay" hidden></div>
   <aside class="cart" aria-label="Your bag" aria-hidden="true">
     <div class="cart-head">
       <h3>Your bag <span class="cart-items-label">(0)</span></h3>
-      <button class="cart-close" aria-label="Close cart">×</button>
+      <button class="cart-close" aria-label="Close bag">×</button>
     </div>
     <div class="cart-ship">
       <p class="ship-msg">Add 2 jars for free shipping</p>
@@ -347,12 +317,12 @@
     </div>
     <ul class="cart-list"></ul>
     <div class="cart-foot">
-      <div class="cart-total"><span>Total</span><strong class="cart-sum">$0</strong></div>
-      <button class="btn btn-dark btn-block checkout">SECURE CHECKOUT</button>
+      <div class="cart-total"><span>Subtotal</span><strong class="cart-sum">$0</strong></div>
+      <button class="btn btn-clay btn-block checkout">Checkout</button>
       <p class="cart-note"></p>
     </div>
   </aside>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=2"></script>
 </body>
 </html>

@@ -1,53 +1,84 @@
-document.getElementById('year').textContent = new Date().getFullYear();
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
-/* Rotating announcement bar */
+$$('#year').forEach(el => { el.textContent = new Date().getFullYear(); });
+
+/* Header: solid background once you scroll */
 (() => {
-  const items = [...document.querySelectorAll('.promo-item')];
-  let i = 0;
-  setInterval(() => {
-    const cur = items[i];
-    cur.classList.remove('is-active');
-    cur.classList.add('is-leaving');
-    setTimeout(() => cur.classList.remove('is-leaving'), 500);
-    i = (i + 1) % items.length;
-    items[i].classList.add('is-active');
-  }, 4000);
+  const hdr = $('.hdr');
+  if (!hdr) return;
+  const onScroll = () => hdr.classList.toggle('is-scrolled', window.scrollY > 40);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 })();
 
-/* Mobile menu */
+/* Fullscreen menu */
 (() => {
-  const toggle = document.querySelector('.nav-toggle');
-  const links = document.querySelector('.nav-links');
-  toggle.addEventListener('click', () => {
-    const open = links.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open);
-  });
-  links.addEventListener('click', e => {
-    if (e.target.tagName === 'A') {
-      links.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
+  const btn = $('.menu-btn');
+  const menu = $('#menu');
+  if (!btn || !menu) return;
+  const label = $('.menu-label', btn);
+  const set = open => {
+    btn.setAttribute('aria-expanded', open);
+    document.body.classList.toggle('menu-open', open);
+    if (label) label.textContent = open ? 'Close' : 'Menu';
+    if (open) {
+      menu.hidden = false;
+      requestAnimationFrame(() => menu.classList.add('is-open'));
+    } else {
+      menu.classList.remove('is-open');
+      setTimeout(() => { if (!menu.classList.contains('is-open')) menu.hidden = true; }, 350);
     }
-  });
+  };
+  btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+  menu.addEventListener('click', e => { if (e.target.closest('a')) set(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.body.classList.contains('menu-open')) set(false); });
+})();
+
+/* Product: size picker and gallery */
+(() => {
+  const pdp = $('.pdp');
+  if (!pdp) return;
+  const price = $('.js-price', pdp);
+  const compare = $('.js-compare', pdp);
+  const btnPrice = $('.js-btn-price', pdp);
+  const update = () => {
+    const v = $('input[name="variant"]:checked', pdp);
+    price.textContent = `$${v.dataset.price}`;
+    compare.textContent = v.dataset.compare ? `$${v.dataset.compare}` : '';
+    btnPrice.textContent = `$${v.dataset.price}`;
+  };
+  $$('input[name="variant"]', pdp).forEach(r => r.addEventListener('change', update));
+  update();
+
+  const main = $('.pdp-main', pdp);
+  const mainImg = $('.pdp-main-img', pdp);
+  $$('.pdp-thumb', pdp).forEach(t => t.addEventListener('click', () => {
+    $$('.pdp-thumb', pdp).forEach(x => x.classList.toggle('is-active', x === t));
+    mainImg.src = t.dataset.src;
+    main.classList.toggle('is-photo', t.dataset.fit === 'photo');
+  }));
 })();
 
 /* Cart */
 (() => {
+  const cart = $('.cart');
+  if (!cart) return;
   const JARS = { single: 1, duo: 2, kit: 3 };
   const FREE_SHIP_JARS = 2;
-  const cart = document.querySelector('.cart');
-  const overlay = document.querySelector('.overlay');
-  const list = document.querySelector('.cart-list');
-  const countEl = document.querySelector('.cart-count');
-  const label = document.querySelector('.cart-items-label');
-  const sumEl = document.querySelector('.cart-sum');
-  const shipMsg = document.querySelector('.ship-msg');
-  const shipBar = document.querySelector('.ship-bar span');
-  const note = document.querySelector('.cart-note');
-  const cartBtn = document.querySelector('.cart-btn');
+  const overlay = $('.overlay');
+  const list = $('.cart-list');
+  const countEl = $('.cart-count');
+  const label = $('.cart-items-label');
+  const sumEl = $('.cart-sum');
+  const shipMsg = $('.ship-msg');
+  const shipBar = $('.ship-bar span');
+  const note = $('.cart-note');
+  const cartBtn = $('.cart-btn');
 
   let items = [];
   try { items = JSON.parse(localStorage.getItem('effect-cart')) || []; } catch (e) { items = []; }
-
   const save = () => { try { localStorage.setItem('effect-cart', JSON.stringify(items)); } catch (e) {} };
 
   const open = () => {
@@ -58,29 +89,26 @@ document.getElementById('year').textContent = new Date().getFullYear();
   const close = () => {
     cart.classList.remove('open');
     cart.setAttribute('aria-hidden', 'true');
-    setTimeout(() => { overlay.hidden = true; }, 350);
+    setTimeout(() => { overlay.hidden = true; }, 400);
   };
 
   const render = () => {
     const qty = items.reduce((n, it) => n + it.qty, 0);
     const jars = items.reduce((n, it) => n + it.qty * (JARS[it.id] || 1), 0);
     const total = items.reduce((n, it) => n + it.qty * it.price, 0);
-
     countEl.textContent = qty;
     label.textContent = `(${qty})`;
     sumEl.textContent = `$${total}`;
-
     const left = Math.max(0, FREE_SHIP_JARS - jars);
     shipMsg.textContent = left ? `Add ${left} more jar${left > 1 ? 's' : ''} for free shipping` : 'You unlocked free shipping';
     shipBar.style.width = `${Math.min(100, (jars / FREE_SHIP_JARS) * 100)}%`;
-
     if (!items.length) {
       list.innerHTML = '<li class="cart-empty">Your bag is empty.</li>';
       return;
     }
     list.innerHTML = items.map(it => `
       <li class="cart-line" data-id="${it.id}">
-        <div class="cart-thumb"><img src="images/texture-jar.jpg" alt=""></div>
+        <div class="cart-thumb"><img src="images/jar-disc.jpg" alt=""></div>
         <div>
           <h4>${it.name}</h4>
           <div class="qty">
@@ -89,21 +117,23 @@ document.getElementById('year').textContent = new Date().getFullYear();
             <button data-act="inc" aria-label="Increase">+</button>
           </div>
         </div>
-        <span class="cart-line-price">$${it.price * it.qty}</span>
+        <span>$${it.price * it.qty}</span>
       </li>`).join('');
   };
 
-  document.querySelectorAll('.add-to-cart').forEach(btn => {
+  $$('.add-to-cart').forEach(btn => {
     btn.addEventListener('click', () => {
-      const p = btn.closest('.product').dataset;
-      const found = items.find(it => it.id === p.id);
+      const v = $('input[name="variant"]:checked');
+      if (!v) return;
+      const found = items.find(it => it.id === v.value);
       if (found) found.qty++;
-      else items.push({ id: p.id, name: p.name, price: Number(p.price), qty: 1 });
+      else items.push({ id: v.value, name: v.dataset.name, price: Number(v.dataset.price), qty: 1 });
       save(); render();
-      btn.textContent = 'ADDED ✓';
+      const html = btn.innerHTML;
+      btn.textContent = 'Added';
       btn.classList.add('added');
       cartBtn.classList.remove('bump'); void cartBtn.offsetWidth; cartBtn.classList.add('bump');
-      setTimeout(() => { btn.textContent = 'ADD TO BAG'; btn.classList.remove('added'); }, 1400);
+      setTimeout(() => { btn.innerHTML = html; btn.classList.remove('added'); }, 1300);
       open();
     });
   });
@@ -119,12 +149,12 @@ document.getElementById('year').textContent = new Date().getFullYear();
   });
 
   cartBtn.addEventListener('click', open);
-  document.querySelector('.cart-close').addEventListener('click', close);
+  $('.cart-close').addEventListener('click', close);
   overlay.addEventListener('click', close);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 
   // Placeholder until a real store (Shopify, Square, Stripe) is connected
-  document.querySelector('.checkout').addEventListener('click', () => {
+  $('.checkout').addEventListener('click', () => {
     note.textContent = items.length ? 'Checkout is coming soon. Ask Tim at the shop to grab a jar.' : 'Add a jar first.';
   });
 
@@ -132,97 +162,93 @@ document.getElementById('year').textContent = new Date().getFullYear();
 })();
 
 /* Newsletter (front-end only for now) */
-document.querySelector('.news-form').addEventListener('submit', e => {
-  e.preventDefault();
-  document.querySelector('.news-msg').textContent = "You're on the list. Thanks!";
-  e.target.reset();
-});
+(() => {
+  const form = $('.news-form');
+  if (!form) return;
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    $('.news-msg').textContent = "You're on the list. Thanks!";
+    form.reset();
+  });
+})();
+
+/* Creator application: posts to Netlify Forms when hosted there */
+(() => {
+  const form = $('.apply-form');
+  if (!form) return;
+  const msg = $('.apply-msg', form);
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = $('button[type="submit"]', form);
+    btn.disabled = true;
+    msg.textContent = 'Sending…';
+    try {
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form)).toString(),
+      });
+      if (!res.ok) throw new Error(res.status);
+      form.reset();
+      msg.textContent = "Application sent. We'll be in touch by email.";
+    } catch (err) {
+      msg.textContent = "Couldn't send right now. Applications open once the site is live.";
+    }
+    btn.disabled = false;
+  });
+})();
 
 /* Reveal on scroll */
 (() => {
-  const targets = document.querySelectorAll('.section-head, .product, .steps li, .founder-copy, .founder-media, .value-copy, .banner-copy, .faq details, .scale');
-  targets.forEach(el => { if (!el.classList.contains('scale')) el.classList.add('reveal'); });
+  const targets = $$('.intro, .pdp-info, .formula-head, .ing-grid li, .without, .compare, .story-copy, .story-media, .band, .faq-wrap, .newsletter, .c-perks li, .c-how, .c-ideas, .c-who, .c-apply');
+  if (!('IntersectionObserver' in window)) return;
+  targets.forEach(el => el.classList.add('reveal'));
   const io = new IntersectionObserver(entries => {
     entries.forEach(en => {
       if (en.isIntersecting) { en.target.classList.add('in-view'); io.unobserve(en.target); }
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.12 });
   targets.forEach(el => io.observe(el));
 })();
 
-/* Scroll hero: plain-JS port of FrameSequenceHero.
-   Photo mode (default): scroll drives a spin / tilt / zoom of the jar photo.
-   Frame mode: set data-frame-count + data-frame-path ("…frame_####.jpg") on
-   .fsh and scroll scrubs through the frames instead, like the original. */
+/* Scroll hero: the jar spins and the rounded shape turns as you scroll.
+   Optional frame mode: add data-frame-count="120" and
+   data-frame-path="images/frames/frame_####.jpg" to .hero to scrub real frames. */
 (() => {
-  const root = document.querySelector('.fsh');
+  const root = $('.hero');
   if (!root) return;
+  const jar = $('.hero-jar', root);
+  const img = $('.fsh-canvas', root);
+  const shape = $('.hero-shape', root);
+  const ring = $('.hero-ring text', root);
+  const title = $('.hero-title span', root);
+  const steps = $$('.hero-steps li', root);
+  const hint = $('.hero-hint', root);
+  const fill = $('.hero-progress span', root);
 
-  const img = root.querySelector('.fsh-canvas');
-  const copy = root.querySelector('.fsh-copy');
-  const sub = root.querySelector('.fsh-sub');
-  const fill = root.querySelector('.fsh-progress-fill');
-  const cards = [...root.querySelectorAll('.fsh-card')];
-  const steps = cards.map(c => ({ from: +c.dataset.from, to: +c.dataset.to }));
-
-  // One tick row per card, one tick per step (same as the React version)
-  const tickRows = cards.map(c => {
-    const row = c.querySelector('.fsh-ticks');
-    row.innerHTML = steps.map(() => '<i class="fsh-tick"><span></span></i>').join('');
-    return [...row.querySelectorAll('.fsh-tick span')];
-  });
-
-  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
-  const ease = t => t * t * (3 - 2 * t);
-
-  /* ---- Frame mode (optional) ---- */
   const frameCount = +root.dataset.frameCount || 0;
   const pattern = root.dataset.framePath || '';
   const framePath = i => pattern.replace('####', String(i).padStart(4, '0'));
-  if (frameCount) {
-    root.classList.add('has-frames');
-    const text = root.querySelector('.fsh-loader-text');
-    const bar = root.querySelector('.fsh-loader-fill');
-    const eager = Math.min(60, frameCount);
-    let loaded = 0;
-    const loadOne = i => {
-      const im = new Image();
-      im.decoding = 'async';
-      const settle = () => {
-        loaded++;
-        const pct = Math.round((loaded / frameCount) * 100);
-        text.textContent = pct < 100 ? `Loading · ${pct}%` : 'Ready';
-        bar.style.width = pct + '%';
-        if (loaded === eager) {
-          root.classList.add('frames-ready');
-          for (let j = eager; j < frameCount; j++) loadOne(j);
-        }
-      };
-      im.onload = settle; im.onerror = settle;
-      im.src = framePath(i + 1);
-    };
-    for (let i = 0; i < eager; i++) loadOne(i);
-    img.src = framePath(1);
-  }
+  if (frameCount) for (let i = 1; i <= frameCount; i++) { const im = new Image(); im.src = framePath(i); }
 
-  /* ---- Photo mode keyframes: scale, spin (deg), tilt (deg), lift (%) ---- */
+  const ease = t => t * t * (3 - 2 * t);
+  // p: progress, r: jar spin, s: jar scale
   const K = [
-    { p: 0.00, s: 0.90, r: -30, rx: 0,  y: 2 },
-    { p: 0.22, s: 1.00, r: 0,   rx: 0,  y: 0 },  // 01 hold: spins in
-    { p: 0.47, s: 1.00, r: 0,   rx: 42, y: 4 },  // 02 shine: tilts toward the light
-    { p: 0.72, s: 1.6,  r: 0,   rx: 0,  y: -6 }, // 03 texture: zooms into the label
-    { p: 1.00, s: 0.95, r: 360, rx: 0,  y: 0 },  // 04 barber: pulls back with a full turn
+    { p: 0.00, r: -24, s: 0.94 },
+    { p: 0.25, r: 0,   s: 1.00 },
+    { p: 0.50, r: 90,  s: 1.04 },
+    { p: 0.75, r: 180, s: 1.14 },
+    { p: 1.00, r: 360, s: 1.00 },
   ];
   const at = p => {
     let i = 0;
     while (i < K.length - 2 && p > K[i + 1].p) i++;
     const a = K[i], b = K[i + 1];
     const t = ease(clamp((p - a.p) / (b.p - a.p)));
-    const mix = k => a[k] + (b[k] - a[k]) * t;
-    return { s: mix('s'), r: mix('r'), rx: mix('rx'), y: mix('y') };
+    return { r: a.r + (b.r - a.r) * t, s: a.s + (b.s - a.s) * t };
   };
 
-  let target = 0, shown = 0, lastFrame = -1, running = false;
+  let target = 0, shown = 0, running = false, lastFrame = -1;
 
   const render = p => {
     if (frameCount) {
@@ -230,32 +256,19 @@ document.querySelector('.news-form').addEventListener('submit', e => {
       if (idx !== lastFrame) { img.src = framePath(idx + 1); lastFrame = idx; }
     } else {
       const k = at(p);
-      img.style.transform = `translateY(${k.y}%) rotateX(${k.rx}deg) rotate(${k.r}deg) scale(${k.s})`;
-      // Fade the title while the jar is zoomed in so they don't collide
-      const fade = clamp((p - 0.5) / 0.12) * (1 - clamp((p - 0.82) / 0.12));
-      copy.style.opacity = 1 - fade;
+      jar.style.transform = `rotate(${k.r}deg) scale(${k.s})`;
     }
-
+    shape.style.transform = `rotate(${-p * 70}deg)`;
+    ring.setAttribute('transform', `rotate(${p * 200} 200 200)`);
+    title.parentElement.style.transform = `translateY(${-p * 6}vh)`;
     fill.style.width = p * 100 + '%';
-
-    let active = -1, local = 0;
-    steps.forEach((s, i) => {
-      if (p >= s.from && p < s.to) { active = i; local = (p - s.from) / (s.to - s.from); }
-    });
-    cards.forEach((c, i) => {
-      c.classList.toggle('fsh-card-active', i === active);
-      c.classList.toggle('fsh-card-prev', active >= 0 && i < active);
-    });
-    if (active >= 0) {
-      tickRows[active].forEach((t, j) => {
-        t.style.transform = `scaleX(${j < active ? 1 : j === active ? clamp(local) : 0})`;
-      });
-    }
+    const active = Math.min(steps.length - 1, Math.floor(p * steps.length));
+    steps.forEach((li, i) => li.classList.toggle('is-on', i === active));
   };
 
   const tick = () => {
     const diff = target - shown;
-    shown = Math.abs(diff) < 0.0005 ? target : shown + diff * 0.16;
+    shown = Math.abs(diff) < 0.0005 ? target : shown + diff * 0.14;
     render(shown);
     if (shown !== target) requestAnimationFrame(tick);
     else running = false;
@@ -265,7 +278,7 @@ document.querySelector('.news-form').addEventListener('submit', e => {
     const rect = root.getBoundingClientRect();
     const total = root.offsetHeight - window.innerHeight;
     target = clamp(-rect.top / Math.max(1, total));
-    sub.classList.toggle('fsh-sub-hidden', rect.top < -8);
+    hint.classList.toggle('is-hidden', rect.top < -8);
     if (!running) { running = true; requestAnimationFrame(tick); }
   };
 
