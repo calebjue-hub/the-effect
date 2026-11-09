@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Effect | Texture Styling Paste</title>
+  <meta name="description" content="Texture styling paste by Effect. Strong hold, low shine. Made by master barber Tim Medina.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Announcement bar (rotating) -->
+  <div class="promo" aria-live="polite">
+    <div class="promo-track">
+      <a href="#shop" class="promo-item is-active">Free shipping on 2+ jars</a>
+      <a href="#bundle" class="promo-item">Stock up: the 3-jar Chair Kit saves 15%</a>
+      <a href="#barber" class="promo-item">Book a cut with Tim, Aurora IL</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="nav">
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#shop">Shop</a>
+      <a href="#how">How to Use</a>
+      <a href="#barber">Our Story</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a href="#top" class="logo" aria-label="Effect home">Effect</a>
+    <div class="nav-actions">
+      <a href="#shop" class="btn btn-sm btn-dark nav-cta">Shop Texture</a>
+      <button class="cart-btn" aria-label="Open cart">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h14l-1.2 12H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-count">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- Scroll hero: the jar animates as you scroll through four feature cards.
+         Plain-JS port of the FrameSequenceHero component. To use a real frame
+         sequence (e.g. a filmed 360° spin), add data-frame-count="120" and
+         data-frame-path="images/frames/frame_####.jpg" to this section. -->
+    <section class="fsh" id="hero">
+      <div class="fsh-stage">
+        <div class="fsh-loader" aria-hidden="true">
+          <p class="fsh-loader-text">Loading · 0%</p>
+          <div class="fsh-loader-track"><span class="fsh-loader-fill"></span></div>
+        </div>
+
+        <div class="fsh-canvas-wrap">
+          <img class="fsh-canvas" src="images/texture-jar.jpg" alt="Effect Texture styling paste jar: strong hold and low shine, 100g" draggable="false">
+        </div>
+
+        <div class="fsh-copy">
+          <p class="fsh-eyebrow">STYLING <span>/ paste</span></p>
+          <h1 class="fsh-title">Texture</h1>
+          <p class="fsh-made">Made by Effect</p>
+        </div>
+
+        <div class="fsh-cards">
+          <article class="fsh-card" data-from="0" data-to="0.25" style="--c:#a8805a">
+            <div class="fsh-card-inner">
+              <span class="fsh-card-glow" aria-hidden="true"></span>
+              <div class="fsh-card-head"><span class="fsh-card-num"><strong>01</strong> / 04</span><span class="fsh-card-icon" aria-hidden="true">✦</span></div>
+              <h3 class="fsh-card-title">Strong hold.</h3>
+              <p class="fsh-card-desc">Locks your shape in place from the first coffee to last call. No touch-ups.</p>
+              <div class="fsh-card-foot"><div class="fsh-ticks"></div><span class="fsh-card-label">Hold</span></div>
+            </div>
+          </article>
+          <article class="fsh-card" data-from="0.25" data-to="0.5" style="--c:#8c8c8c">
+            <div class="fsh-card-inner">
+              <span class="fsh-card-glow" aria-hidden="true"></span>
+              <div class="fsh-card-head"><span class="fsh-card-num"><strong>02</strong> / 04</span><span class="fsh-card-icon" aria-hidden="true">◐</span></div>
+              <h3 class="fsh-card-title">Low shine.</h3>
+              <p class="fsh-card-desc">A natural matte finish that looks like hair, not product.</p>
+              <div class="fsh-card-foot"><div class="fsh-ticks"></div><span class="fsh-card-label">Finish</span></div>
+            </div>
+          </article>
+          <article class="fsh-card" data-from="0.5" data-to="0.75" style="--c:#c9a27c">
+            <div class="fsh-card-inner">
+              <span class="fsh-card-glow" aria-hidden="true"></span>
+              <div class="fsh-card-head"><span class="fsh-card-num"><strong>03</strong> / 04</span><span class="fsh-card-icon" aria-hidden="true">▣</span></div>
+              <h3 class="fsh-card-title">Real texture.</h3>
+              <p class="fsh-card-desc">Grit, volume and separation. Restyle with your fingers all day.</p>
+              <div class="fsh-card-foot"><div class="fsh-ticks"></div><span class="fsh-card-label">Texture</span></div>
+            </div>
+          </article>
+          <article class="fsh-card" data-from="0.75" data-to="1.01" style="--c:#141414">
+            <div class="fsh-card-inner">
+              <span class="fsh-card-glow" aria-hidden="true"></span>
+              <div class="fsh-card-head"><span class="fsh-card-num"><strong>04</strong> / 04</span><span class="fsh-card-icon" aria-hidden="true">✂</span></div>
+              <h3 class="fsh-card-title">Made by a barber.</h3>
+              <p class="fsh-card-desc">The paste Tim Medina finishes his own clients with. 100g jar.</p>
+              <a href="#shop" class="btn btn-dark btn-sm fsh-card-cta">SHOP TEXTURE · $24</a>
+              <div class="fsh-card-foot"><div class="fsh-ticks"></div><span class="fsh-card-label">Effect</span></div>
+            </div>
+          </article>
+        </div>
+
+        <a href="#shop" class="btn btn-dark fsh-cta">SHOP NOW</a>
+        <p class="fsh-sub">Scroll to explore</p>
+        <div class="fsh-progress"><span class="fsh-progress-fill"></span></div>
+      </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Strong hold</span><span>✦</span><span>Low shine</span><span>✦</span><span>Matte texture</span><span>✦</span><span>Restylable</span><span>✦</span><span>Washes out clean</span><span>✦</span><span>Made by a barber</span><span>✦</span>
+        <span>Strong hold</span><span>✦</span><span>Low shine</span><span>✦</span><span>Matte texture</span><span>✦</span><span>Restylable</span><span>✦</span><span>Washes out clean</span><span>✦</span><span>Made by a barber</span><span>✦</span>
+      </div>
+    </div>
+
+    <!-- Shop -->
+    <section id="shop" class="section">
+      <div class="section-head">
+        <h2>Shop the <em>best seller</em></h2>
+        <p>One jar. Every texture. Pick the size that fits how often you style.</p>
+      </div>
+
+      <div class="products">
+        <article class="product" data-id="single" data-name="Texture Styling Paste" data-price="24">
+          <div class="product-media">
+            <span class="badge">Best seller</span>
+            <img src="images/texture-jar.jpg" alt="Texture styling paste, single jar" loading="lazy">
+          </div>
+          <div class="product-body">
+            <h3>Texture Styling Paste</h3>
+            <p class="product-meta">100g · Strong hold · Low shine</p>
+            <div class="price"><span>$24</span></div>
+            <button class="btn btn-dark btn-block add-to-cart">ADD TO BAG</button>
+          </div>
+        </article>
+
+        <article class="product" data-id="duo" data-name="Texture Duo" data-price="44">
+          <div class="product-media">
+            <span class="badge badge-accent">8% off</span>
+            <img src="images/texture-jar.jpg" alt="Texture styling paste, two jars" loading="lazy">
+            <span class="qty-tag">×2</span>
+          </div>
+          <div class="product-body">
+            <h3>Texture Duo</h3>
+            <p class="product-meta">2 × 100g · Free shipping</p>
+            <div class="price"><span>$44</span><s>$48</s></div>
+            <button class="btn btn-dark btn-block add-to-cart">ADD TO BAG</button>
+          </div>
+        </article>
+
+        <article class="product" id="bundle" data-id="kit" data-name="The Chair Kit" data-price="61">
+          <div class="product-media">
+            <span class="badge badge-accent">15% off</span>
+            <img src="images/texture-jar.jpg" alt="Texture styling paste, three jars" loading="lazy">
+            <span class="qty-tag">×3</span>
+          </div>
+          <div class="product-body">
+            <h3>The Chair Kit</h3>
+            <p class="product-meta">3 × 100g · Free shipping</p>
+            <div class="price"><span>$61</span><s>$72</s></div>
+            <button class="btn btn-dark btn-block add-to-cart">ADD TO BAG</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Value stack -->
+    <section class="value">
+      <div class="value-media">
+        <img src="images/texture-jar.jpg" alt="" loading="lazy">
+      </div>
+      <div class="value-copy">
+        <p class="eyebrow eyebrow-light">Why Texture</p>
+        <h2>Built in the chair, <em>not a lab.</em></h2>
+        <ul class="checks">
+          <li>Strong hold that lasts from morning to night</li>
+          <li>Low shine, natural matte finish</li>
+          <li>Adds grit, volume and separation</li>
+          <li>Restyle with your hands, no reapplying</li>
+          <li>Rinses out with one wash</li>
+        </ul>
+        <a href="#shop" class="btn btn-light">SHOP TEXTURE</a>
+      </div>
+    </section>
+
+    <!-- How to use -->
+    <section id="how" class="section">
+      <div class="section-head">
+        <h2>How to <em>use it</em></h2>
+        <p>Thirty seconds, four steps. Less is more. You can always add.</p>
+      </div>
+      <ol class="steps">
+        <li><span class="step-num">01</span><h3>Dry hair</h3><p>Start with dry or towel-dried hair for the most grip.</p></li>
+        <li><span class="step-num">02</span><h3>Warm it up</h3><p>Scoop a fingertip's worth and rub between your palms until it's clear.</p></li>
+        <li><span class="step-num">03</span><h3>Work it in</h3><p>Rake it through from the back to the front, roots to ends.</p></li>
+        <li><span class="step-num">04</span><h3>Shape it</h3><p>Twist, push and piece it with your fingers. Add more for extra hold.</p></li>
+      </ol>
+    </section>
+
+    <!-- Founder / barber -->
+    <section id="barber" class="founder">
+      <div class="founder-media">
+        <div class="founder-photo">
+          <img src="images/tim-medina.jpg" alt="Tim Medina, master barber and founder of Effect, in a grey suit on a leather couch" loading="lazy">
+        </div>
+        <p class="founder-tag">Tim Medina<small>Master Barber</small></p>
+      </div>
+      <div class="founder-copy">
+        <p class="eyebrow">Our story</p>
+        <h2>Made by the guy <em>cutting your hair.</em></h2>
+        <p>Effect started behind the chair. Tim Medina is a master barber who spent years reaching for products that either held but looked greasy, or looked right but fell flat by lunch.</p>
+        <p>So he made his own. Texture is the paste he finishes his own clients with: strong hold, low shine, and a look that still moves like hair.</p>
+        <div class="founder-ctas">
+          <a href="https://www.effecthairstudios.com/book" class="btn btn-dark" target="_blank" rel="noopener">BOOK A CUT</a>
+          <a href="https://www.effecthairstudios.com/" class="btn btn-ghost" target="_blank" rel="noopener">EFFECT HAIR STUDIO</a>
+        </div>
+        <p class="founder-loc">Beauty Concepts · 4012 Fox Valley Center Dr, Aurora, IL 60504</p>
+      </div>
+    </section>
+
+    <!-- Hold / shine scale -->
+    <section class="section scale-wrap">
+      <div class="section-head">
+        <h2>Where it <em>sits</em></h2>
+        <p>How Texture compares to the rest of the shelf.</p>
+      </div>
+      <div class="scale">
+        <div class="scale-row">
+          <span class="scale-label">Hold</span>
+          <div class="scale-bar"><span style="--v: 85%"></span></div>
+          <span class="scale-end">Strong</span>
+        </div>
+        <div class="scale-row">
+          <span class="scale-label">Shine</span>
+          <div class="scale-bar"><span style="--v: 20%"></span></div>
+          <span class="scale-end">Low</span>
+        </div>
+        <div class="scale-row">
+          <span class="scale-label">Texture</span>
+          <div class="scale-bar"><span style="--v: 90%"></span></div>
+          <span class="scale-end">High</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Banner -->
+    <section class="banner">
+      <div class="banner-copy">
+        <h2>Messy on purpose.<br><em>Sharp by design.</em></h2>
+        <p>The finish your barber gives you, in a jar you can take home.</p>
+        <a href="#shop" class="btn btn-light">GET THE LOOK</a>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section faq-wrap">
+      <div class="section-head">
+        <h2>Questions, <em>answered</em></h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>Is it a clay, a paste or a pomade?</summary>
+          <p>Texture is a styling paste with a clay-like matte finish. It gives the grip and texture of a clay with the easy spread of a paste, and none of the wet shine of a pomade.</p>
+        </details>
+        <details>
+          <summary>What hair types does it work on?</summary>
+          <p>Short to medium-length hair, straight to wavy. It's great for textured crops, quiffs, messy fringes and side parts. Thick hair may need a little more product.</p>
+        </details>
+        <details>
+          <summary>How much should I use?</summary>
+          <p>Start with a fingertip-sized scoop. Warm it fully in your palms before applying. Add more only if you need extra hold.</p>
+        </details>
+        <details>
+          <summary>Does it wash out?</summary>
+          <p>Yes. One wash with regular shampoo takes it out.</p>
+        </details>
+        <details>
+          <summary>How long does a jar last?</summary>
+          <p>With daily use, most people get about two to three months from a 100g jar.</p>
+        </details>
+        <details>
+          <summary>Can I buy it at the shop?</summary>
+          <p>Yes. Ask Tim at your next appointment at Beauty Concepts in Aurora, IL.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+      <h2>Don't miss <em>a drop.</em></h2>
+      <p>Restocks, new products and styling tips from Tim. No spam.</p>
+      <form class="news-form">
+        <label for="email" class="sr-only">Email address</label>
+        <input id="email" type="email" placeholder="Your email" required>
+        <button class="btn btn-dark" type="submit">SIGN UP</button>
+      </form>
+      <p class="news-msg" role="status"></p>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo logo-light">Effect</span>
+        <p>Texture styling paste. Strong hold, low shine. Made by a barber.</p>
+      </div>
+      <div class="footer-cols">
+        <div>
+          <h4>Shop</h4>
+          <a href="#shop">Texture Paste</a>
+          <a href="#bundle">The Chair Kit</a>
+        </div>
+        <div>
+          <h4>Learn</h4>
+          <a href="#how">How to Use</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div>
+          <h4>Effect</h4>
+          <a href="#barber">Our Story</a>
+          <a href="https://www.effecthairstudios.com/book" target="_blank" rel="noopener">Book a Cut</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> Effect Hair Studio · Aurora, IL</p>
+    </div>
+  </footer>
+
+  <!-- Cart drawer -->
+  <div class="overlay" hidden></div>
+  <aside class="cart" aria-label="Your bag" aria-hidden="true">
+    <div class="cart-head">
+      <h3>Your bag <span class="cart-items-label">(0)</span></h3>
+      <button class="cart-close" aria-label="Close cart">×</button>
+    </div>
+    <div class="cart-ship">
+      <p class="ship-msg">Add 2 jars for free shipping</p>
+      <div class="ship-bar"><span></span></div>
+    </div>
+    <ul class="cart-list"></ul>
+    <div class="cart-foot">
+      <div class="cart-total"><span>Total</span><strong class="cart-sum">$0</strong></div>
+      <button class="btn btn-dark btn-block checkout">SECURE CHECKOUT</button>
+      <p class="cart-note"></p>
+    </div>
+  </aside>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
